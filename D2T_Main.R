@@ -57,7 +57,8 @@ for(i in i:length(datasetWithoutDate)){
 #highsest growth analysis
 i <- 1
 vectorHighestGrowthAnalysisResult <- c()
-vectorInterpreterRes <- c()
+vectorInterpreterRes <- list()
+vectorInterpreterIndex <- c()
 vectorStartIndex <- c()
 vectorEndIndex <- c()
 for(i in i:length(datasetWithoutDate)){
@@ -68,11 +69,12 @@ for(i in i:length(datasetWithoutDate)){
   vectorStartIndex[i] <-listHighestGrowthAnalysisResult$startIndexResult
   vectorEndIndex[i] <-listHighestGrowthAnalysisResult$endIndexResult
   
-  vectorInterpreterRes[i] <- MembershipFuzzy(vectorGrowth, TrendFuzzyGenerator(columnName[i], statisticalResume))$InterpreterIndex
+  vectorInterpreterRes[[i]] <- MembershipFuzzy(vectorGrowth, TrendFuzzyGenerator(columnName[i], statisticalResume))
+  # vectorInterpreterIndex[i] <- MembershipFuzzy(vectorGrowth, TrendFuzzyGenerator(columnName[i], statisticalResume))$InterpreterIndex
   
 }
 
-
+ResumeHighestGrowth(vectorInterpreterRes)
 
 # DATA INTERPRETATION
 interpreterNow <- DataInterpreter(datasetNow,statisticalResume)
